@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #234891; /* Cor de fundo */
+  border: none; /* Remover borda */
+  color: white; /* Cor do texto */
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.initial-page,
+.question-container,
+.result-page,
+.right-answers {
+  padding: 20px;
+  background-color: #004080; /* Cor de fundo para os containers */
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button.btn {
+  background-color: #ffcc00; /* Mantendo o amarelo original */
+  color: #000;
+  border: none;
+  padding: 15px 25px;
+  margin: 20px auto;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.btn:hover {
+  background-color: #ff9900; /* Cor ligeiramente mais escura para hover */
+}
+
+ul.optionsFlexbox {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+li.optionUnitClass {
+  margin-bottom: 15px;
+  font-size: 20px; /* Aumentando a fonte das opções */
+  color: #ffffff; /* Cor do texto das opções */
+  display: flex;
+  align-items: center;
+}
+
+input[type="radio"] {
+  margin-right: 15px;
+  transform: scale(1.5);
+  accent-color: #ffcc00; /* Personalizando o estilo do radio button */
+}
+
+.resultPage .questionFlexbox,
+.right-answers .question-box h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button#right-answers-btn {
+  background-color: #ffcc00; /* Destaque para o botão */
+  padding: 25px 35px; /* Aumentando o tamanho do botão */
+  font-size: 45px; /* Aumentando o tamanho da fonte */
+  font-weight: bold;
+  cursor: pointer;
+  display: block; /* Garante que o botão ocupe toda a largura disponível */
+  text-align: center; /* Centraliza o texto no botão */
+}
+
+button#right-answers-btn:hover {
+  background-color: #ff9900; /* Cor mais escura ao passar o mouse */
+}
+
+.resultPage .btn-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+button#redo-btn,
+button#share-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+button#redo-btn:hover,
+button#share-btn:hover {
+  background-color: #ff9900; /* Cor de hover para os botões menores */
+}
+
+.gabarito {
+  font-size: 18px; /* Aumentando a fonte do gabarito */
+  color: #ffffff; /* Cor do texto do gabarito */
+  margin-top: 10px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column; /* Alinha o ícone e o texto verticalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  justify-content: flex-start; /* Centraliza o conteúdo horizontalmente */
+  text-align: center; /* Centraliza o texto dentro do container */
+  width: 100%; /* Garante que o container ocupe toda a largura disponível */
+  margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+.result-container .result-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  justify-content: flex-start; /* Centraliza o conteúdo horizontalmente */
+}
+
+.result-container .result-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  justify-content: flex-start; /* Centraliza o conteúdo horizontalmente */
+}
+
+.result-container img {
+  margin-right: 0;
+  margin-bottom: 8px; /* Espaçamento entre o ícone e o texto */
+}
+
+button#show-results-btn {
+  background-color: #ffcc00; /* Cor do botão */
+  padding: 25px 35px; /* Aumentando o tamanho do botão */
+  font-size: 32px; /* Aumentando o tamanho da fonte */
+  font-weight: bold;
+  margin: 40px auto; /* Centralizando e aumentando a margem superior e inferior */
+  border-radius: 10px;
+  cursor: pointer;
+  display: block; /* Garante que o botão ocupe toda a largura disponível */
+  text-align: center; /* Centraliza o texto no botão */
+}
+
+button#show-results-btn:hover {
+  background-color: #ff9900; /* Cor mais escura ao passar o mouse */
+}
+
+@media (max-width: 768px) {
+  .initial-page,
+  .question-container,
+  .result-page,
+  .right-answers {
+    padding: 15px;
+    margin: 10px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button.btn {
+    padding: 12px 20px;
+    font-size: 18px;
+  }
+
+  button#show-results-btn {
+    padding: 20px 30px; /* Ajuste do padding para telas menores */
+    font-size: 24px; /* Ajuste do tamanho da fonte */
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+}
