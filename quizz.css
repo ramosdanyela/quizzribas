@@ -7,7 +7,7 @@ body {
   border: none; /* Remover borda */
   color: white; /* Cor do texto */
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -52,8 +52,24 @@ img {
   border-radius: 8px;
   margin-bottom: 20px;
   display: block;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
+}
+
+.result-text {
+  gap: 20px;
+}
+
+.result-text img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: block;
+  margin-right: unset !important;
+  margin-left: unset !important;
+  color: red;
+  margin-bottom: unset !important;
 }
 
 button.btn {
@@ -76,6 +92,11 @@ button.btn:hover {
   background-color: #ff9900; /* Cor ligeiramente mais escura para hover */
 }
 
+.optionsFlexbox {
+  padding-left: 10%;
+  gap: 20px;
+}
+
 ul.optionsFlexbox {
   list-style-type: none;
   padding: 0;
@@ -87,7 +108,7 @@ ul.optionsFlexbox {
 }
 
 li.optionUnitClass {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   font-size: 20px; /* Aumentando a fonte das opções */
   color: #ffffff; /* Cor do texto das opções */
   display: flex;
@@ -104,6 +125,15 @@ input[type="radio"] {
 .right-answers .question-box h2 {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.question-box {
+  border-bottom: 1px solid white;
+  padding-bottom: 33px;
+}
+
+.question-container-master {
+  width: 100%;
 }
 
 button#right-answers-btn {
@@ -191,6 +221,16 @@ button#show-results-btn:hover {
   background-color: #ff9900; /* Cor mais escura ao passar o mouse */
 }
 
+.show-results {
+  height: 100vh;
+  align-items: center;
+  justify-items: center;
+}
+
+.right-answers .btn {
+  margin: 20px 20px 20px auto !important;
+}
+
 @media (max-width: 768px) {
   .initial-page,
   .question-container,
@@ -219,5 +259,10 @@ button#show-results-btn:hover {
     font-size: 24px; /* Ajuste do tamanho da fonte */
     margin-top: 30px;
     margin-bottom: 20px;
+  }
+
+  #right-answers-btn {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 24px !important;
   }
 }

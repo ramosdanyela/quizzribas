@@ -141,10 +141,15 @@ let quizz = [
     qImg: "q2ferrovia.jpg",
     question:
       "Qual era o nome da companhia responsável pela construção da ferrovia que cruzava Ribas?",
-    options: ["ALL", "Ferrovia Norte-Sul", "RFFSA", "MRS"],
+    options: [
+      "ALL",
+      "Ferrovia Norte-Sul",
+      "Estrada de Ferro Noroeste do Brasil (NOB)",
+      "RFFSA",
+    ],
     answer: 2,
     comment:
-      "A Rede Ferroviária Federal Sociedade Anônima (RFFSA), também conhecida pelo acrônimo 'Refesa', foi uma empresa estatal brasileira de transporte ferroviário que cobria boa parte do território brasileiro, criada em 1957 e sediada no Rio de Janeiro. A empresa foi formada pela união de vários frentes ferroviárias que já existiam. Entre elas, a Estrada de Ferro Noroeste do Brasil (NOB). A Estrada de Ferro Noroeste do Brasil (NOB) era uma companhia ferroviária brasileira que operava uma rede ferroviária de bitola métrica (um metro de distância entre os trilhos) com extensão de 1622 quilômetros, construída na primeira metade do século XX. Sua linha-tronco vai de Bauru até Corumbá, na divisa com a Bolívia, onde faz integração com a rede ferroviária boliviana até Santa Cruz de la Sierra.  ",
+      "A Estrada de Ferro Noroeste do Brasil (NOB) era uma companhia ferroviária brasileira que operava uma rede ferroviária de bitola métrica (um metro de distância entre os trilhos) com extensão de 1622 quilômetros, construída na primeira metade do século XX. Sua linha-tronco vai de Bauru até Corumbá, na divisa com a Bolívia, onde faz integração com a rede ferroviária boliviana até Santa Cruz de la Sierra. A NOB foi incorporada à Rede Ferroviária Federal S.A. (RFFSA) em 1957.",
   },
   {
     qNumber: 3,
@@ -171,7 +176,7 @@ let quizz = [
   },
   {
     qNumber: 5,
-    qImg: "q5maestro.jpg",
+    qImg: "q5maestro.jpeg",
     question:
       "Qual era nome do maestro que fundou a Fanfarra de Ribas do Rio Pardo?",
     options: ["Raul", "Saul", "Rafael", "Jehú"],
@@ -264,7 +269,7 @@ quizz.forEach((obj, index) => {
   questionImage.className = "question-image";
   questionImage.style.justifyContent = "center";
   questionImage.style.width = "300px";
-  questionImage.style.height = "200px";
+  questionImage.style.height = "auto";
   questionImage.style.borderRadius = "8px";
   questionContainer.appendChild(questionImage);
 
@@ -358,7 +363,7 @@ function showNextQuestion() {
     if (currentQuestion < allQuestions.length) {
       allQuestions[currentQuestion].style.display = "block";
     } else {
-      p3ShowResults.style.display = "block";
+      p3ShowResults.style.display = "flex";
       // Exibe a tela de resultados ou uma mensagem
     }
   }
@@ -489,6 +494,90 @@ resultsPage.forEach((obj, index) => {
     p3ShowResults.style.display = "none";
     p4Results.style.display = "none";
     p5Answers.style.display = "block";
+
+    //o que acontece quando clica aqui
+    quizz.forEach((question, index) => {
+      // Criação da caixa da pergunta
+      const questionBox = document.createElement("div");
+      questionBox.classList.add("question-box");
+      questionBox.style.display = "flex";
+      questionBox.style.flexDirection = "column";
+      questionBox.style.marginBottom = "20px";
+      p5Answers.appendChild(questionBox);
+
+      // Título da pergunta
+      const questionTitle = document.createElement("h2");
+      questionTitle.textContent = `Questão ${index + 1}: ${question.question}`;
+      questionBox.appendChild(questionTitle);
+
+      console.log(selectedAnswers);
+      // Índices da resposta do usuário e da resposta correta
+      const userAnswerIndex = parseInt(selectedAnswers[index], 10); // Convertendo para número inteiro
+      const correctAnswerIndex = question.answer;
+
+      // Usando o DOM para pegar o label associado à resposta do usuário
+      const userAnswerLabel = document.querySelector(
+        `label[for="${question.options[userAnswerIndex]}"]`
+      );
+      const userAnswerText = userAnswerLabel
+        ? userAnswerLabel.textContent
+        : "Resposta não selecionada";
+      const correctAnswerText = question.options[correctAnswerIndex];
+
+      // Verifica se a resposta está correta ou errada
+      const resultContainer = document.createElement("div");
+      resultContainer.style.display = "flex";
+      resultContainer.className = ".result-container";
+      resultContainer.style.alignItems = "center";
+      //resultContainer.style.marginBottom = "10px";
+
+      const resultIcon = document.createElement("img");
+      resultContainer.className = ".result-icon";
+      resultIcon.style.width = "20px";
+      resultIcon.style.height = "20px";
+      resultIcon.style.marginRight = "8px";
+
+      const resultText = document.createElement("p");
+      resultContainer.className = "result-text";
+
+      if (userAnswerIndex == correctAnswerIndex) {
+        // Se a resposta está correta
+        resultIcon.src = "correct_icon.png"; // Substitua pelo caminho do ícone de correto
+        resultText.textContent = "Você acertou!";
+        resultText.style.color = "green";
+      } else {
+        // Se a resposta está errada
+        resultIcon.src = "wrong_icon.png"; // Substitua pelo caminho do ícone de errado
+        resultText.textContent = "Você errou! :(";
+        resultText.style.color = "red";
+      }
+
+      resultContainer.appendChild(resultIcon);
+      resultContainer.appendChild(resultText);
+      questionBox.appendChild(resultContainer);
+
+      // Espaço entre o resultado e as respostas
+      //const spacer = document.createElement("br");
+      //questionBox.appendChild(spacer);
+
+      // Exibição da resposta do usuário
+      const userAnswerContainer = document.createElement("p");
+      userAnswerContainer.innerHTML = `<strong>Sua resposta:</strong> ${userAnswerText}`;
+      questionBox.appendChild(userAnswerContainer);
+
+      // Exibição da resposta correta
+      const correctAnswerContainer = document.createElement("p");
+      correctAnswerContainer.innerHTML = `<strong>Resposta correta:</strong> ${correctAnswerText}`;
+      questionBox.appendChild(correctAnswerContainer);
+
+      // Comentário da questão (opcional)
+      const commentDiv = document.createElement("div");
+      commentDiv.innerHTML = `<strong>Comentário:</strong> ${question.comment}`;
+      commentDiv.style.marginTop = "10px";
+      questionBox.appendChild(commentDiv);
+    });
+
+    createButtonRedo(p5Answers);
   });
 
   // Redo-BTN
@@ -598,82 +687,39 @@ showResultsBtn.addEventListener("click", () => {
 // Título da página de gabarito
 
 // Função para exibir o gabarito
-quizz.forEach((question, index) => {
-  // Criação da caixa da pergunta
-  const questionBox = document.createElement("div");
-  questionBox.classList.add("question-box");
-  questionBox.style.display = "flex";
-  questionBox.style.flexDirection = "column";
-  questionBox.style.marginBottom = "20px";
-  p5Answers.appendChild(questionBox);
 
-  // Título da pergunta
-  const questionTitle = document.createElement("h2");
-  questionTitle.textContent = `Questão ${index + 1}: ${question.question}`;
-  questionBox.appendChild(questionTitle);
+function createButtonRedo(page) {
+  const redoBtn = document.createElement("button");
+  redoBtn.style.display = "flex";
+  redoBtn.type = "button";
+  redoBtn.className = "btn";
+  redoBtn.id = "redo-btn";
+  redoBtn.innerHTML = "Refazer <span>&#8635;</span>"; // Usando innerHTML para incluir o span
+  redoBtn.style.justifyContent = "flex-end";
+  page.appendChild(redoBtn);
 
-  // Índices da resposta do usuário e da resposta correta
-  const userAnswerIndex = parseInt(selectedAnswers[index], 10); // Convertendo para número inteiro
-  const correctAnswerIndex = question.answer;
+  redoBtn.addEventListener("click", () => {
+    // Resetar os arrays
+    selectedAnswers.fill(null);
+    resultsArray.fill(null);
+    currentQuestion = 0;
 
-  // Usando o DOM para pegar o label associado à resposta do usuário
-  const userAnswerLabel = document.querySelector(
-    `label[for="${question.options[userAnswerIndex]}"]`
-  );
-  const userAnswerText = userAnswerLabel
-    ? userAnswerLabel.textContent
-    : "Resposta não selecionada";
-  const correctAnswerText = question.options[correctAnswerIndex];
+    // Resetar todos os inputs de radio buttons
+    const radios = p2Questions.querySelectorAll('input[type="radio"]');
+    radios.forEach((radio) => {
+      radio.checked = false;
+    });
 
-  // Verifica se a resposta está correta ou errada
-  const resultContainer = document.createElement("div");
-  resultContainer.style.display = "flex";
-  resultContainer.className = ".result-container";
-  resultContainer.style.alignItems = "center";
-  resultContainer.style.marginBottom = "10px";
+    // Exibir a tela inicial e esconder as outras
+    p1Cover.style.display = "block";
+    p2Questions.style.display = "none";
+    p3ShowResults.style.display = "none";
+    p4Results.style.display = "none";
+    p5Answers.style.display = "none";
 
-  const resultIcon = document.createElement("img");
-  resultContainer.className = ".result-icon";
-  resultIcon.style.width = "20px";
-  resultIcon.style.height = "20px";
-  resultIcon.style.marginRight = "8px";
-
-  const resultText = document.createElement("p");
-  resultContainer.className = ".result-text";
-
-  if (userAnswerIndex == correctAnswerIndex) {
-    // Se a resposta está correta
-    resultIcon.src = "correct_icon.png"; // Substitua pelo caminho do ícone de correto
-    resultText.textContent = "Você acertou!";
-    resultText.style.color = "green";
-  } else {
-    // Se a resposta está errada
-    resultIcon.src = "wrong_icon.png"; // Substitua pelo caminho do ícone de errado
-    resultText.textContent = "Você errou! :(";
-    resultText.style.color = "red";
-  }
-
-  resultContainer.appendChild(resultIcon);
-  resultContainer.appendChild(resultText);
-  questionBox.appendChild(resultContainer);
-
-  // Espaço entre o resultado e as respostas
-  const spacer = document.createElement("br");
-  questionBox.appendChild(spacer);
-
-  // Exibição da resposta do usuário
-  const userAnswerContainer = document.createElement("p");
-  userAnswerContainer.innerHTML = `<strong>Sua resposta:</strong> ${userAnswerText}`;
-  questionBox.appendChild(userAnswerContainer);
-
-  // Exibição da resposta correta
-  const correctAnswerContainer = document.createElement("p");
-  correctAnswerContainer.innerHTML = `<strong>Resposta correta:</strong> ${correctAnswerText}`;
-  questionBox.appendChild(correctAnswerContainer);
-
-  // Comentário da questão (opcional)
-  const commentDiv = document.createElement("div");
-  commentDiv.innerHTML = `<strong>Comentário:</strong> ${question.comment}`;
-  commentDiv.style.marginTop = "10px";
-  questionBox.appendChild(commentDiv);
-});
+    // Redefinir a exibição das questões para começar da primeira
+    allQuestions.forEach((container, index) => {
+      container.style.display = index === 0 ? "block" : "none";
+    });
+  });
+}
